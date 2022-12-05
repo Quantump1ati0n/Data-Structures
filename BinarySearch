@@ -1,0 +1,48 @@
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
+
+        //get list length
+        System.out.println("Let's play a number guessing game. How high do you want to go?");
+        int listLength = scanner.nextInt();
+
+        //generate list
+        int[] numbers = new int[listLength];
+        for (int i = 0; i < listLength; i++) {
+            numbers[i] = i + 1;
+        }
+
+        System.out.println("Okay, pick a number between 1 and " + listLength + ".");
+        System.out.println("Ready?... Press \"Enter\" to continue.");
+        System.in.read();
+        binarySearchGame(numbers, scanner);
+        System.out.println("Thanks for playing.");
+    }
+
+    public static void binarySearchGame(int[] numbers, Scanner scanner) {
+        double lowIndex = 0;
+        double highIndex = numbers.length;
+        double midIndex = 0;
+
+        while (lowIndex <= highIndex) {
+            midIndex = Math.ceil((lowIndex + highIndex) / 2);
+
+            System.out.printf("Is your number %.0f? Enter \"y\" or \"n\".", midIndex);
+            String response = scanner.next();
+                if (response.equals("y")) {
+                    break;
+                } else {
+                    System.out.println("Did I guess too high or too low? enter \"h\" or \"l\"");
+                    String response2 = scanner.next();
+                    if (response2.equals("h")) {
+                        highIndex = midIndex;
+                    } else {
+                        lowIndex = midIndex;
+                    }
+                }
+        }
+    }
+}
