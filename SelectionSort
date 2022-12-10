@@ -1,0 +1,84 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class SelectionSort {
+    public static void main(String args[]) {
+        //instantiate scanner
+        Scanner scanner = new Scanner(System.in);
+
+        //get quantity of numbers to sort
+        System.out.print("How many numbers to sort? ");
+        int quantity = scanner.nextInt();
+        int[] numbers = new int[quantity];
+
+        //initialize array of numbers to sort
+        System.out.print("Enter numbers to sort: ");
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = scanner.nextInt();
+        }
+
+        //get sort order
+        System.out.print("Sort in ascending or descending order? Enter \"a\" or \"d\": ");
+        String response = scanner.next();
+
+        if (response.equals("a")) {
+            sortAscending(numbers);
+            System.out.print("The sorted list is: ");
+            for (int i = 0; i < numbers.length; i++) {
+                System.out.print(numbers[i] + " ");
+            }
+        } else if (response.equals("d")) {
+            sortDescending(numbers);
+            System.out.println("The sorted list is: ");
+            for (int i = 0; i < numbers.length; i++) {
+                System.out.print(numbers[i] + " ");
+            }
+        }
+    }
+    public static int[] sortAscending (int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            //the starting index is the current maximum on each pass
+            int currentMax = arr[i];
+            //the index of the current maximum
+            int currentMaxIndex = i;
+            //iterate over all indices after the current max index
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] > currentMax) {
+                    //assign the max value to currentMax
+                    currentMax = arr[j];
+                    //index location for swapping
+                    currentMaxIndex = j;
+                }
+            }
+            //swap the current max value with the value at index i
+            int temp = arr[i];
+            arr[i] = currentMax;
+            arr[currentMaxIndex] = temp;
+        }
+        return arr;
+    }
+
+    public static int[] sortDescending (int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            //the starting index is the current minimum on each pass
+            int currentMin = arr[i];
+            //the index of the current minimum
+            int currentMinIndex = i;
+            //iterate over all indices after the current min index
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < currentMin) {
+                    //assign the min value to currentMin
+                    currentMin = arr[j];
+                    //index location for swapping
+                    currentMinIndex = j;
+                }
+            }
+            //swap the current min value with the value at index i
+            int temp = arr[i];
+            arr[i] = currentMin;
+            arr[currentMinIndex] = temp;
+        }
+        return arr;
+    }
+}
