@@ -1,0 +1,46 @@
+import java.util.Random;
+
+public class InsertionSort {
+    public static void main (String args[]) {
+        Random rand = new Random();
+
+        //initialize array and fill with random integers
+        int[] array = new int[10];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = rand.nextInt(100);
+        }
+        
+        //print array before sort
+        System.out.print("Before: ");
+        for (int i : array) {
+            System.out.print(i + " ");
+        }
+
+        //perform sort
+        insertionSort(array);
+
+        //print array after sort
+        System.out.println();
+        System.out.print("After: ");
+        for (int i : array) {
+            System.out.print(i + " ");
+        }
+    }
+    public static void insertionSort (int[] array) {
+        for (int i = 1; i < array.length; i++) {
+            //stores the element at i, beginning with the second card
+            int key = array[i];
+            //walk back to the beginning of the array
+            int j = i - 1;
+            //walk back until you hit the beginning of the array,
+            //and look for the leftmost position in the array
+            //where the element is greater than the key
+            while (j >= 0 && array[j] > key) {
+                array[j + 1] = array[j];
+                j--;
+            }
+            array[j + 1] = key;
+
+        }
+    }
+}
